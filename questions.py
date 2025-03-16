@@ -19,21 +19,21 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
+# se seleccionan 3 preguntas aleatorias
+questions_to_ask = random.choices(list(zip(questions,answers, correct_answers_index)), k=3)
 # contador de puntos
 puntos = 0
 # El usuario deberá contestar 3 preguntas
-for _ in range(3):
-    # Se selecciona una pregunta aleatoria
-    question_index = random.randint(0, len(questions)-1)
+for questions, answers, correct_answers in questions_to_ask:
     # Se muestra la pregunta y las respuestas posibles
-    print(questions[question_index])
-    for i, answer in enumerate(answers[question_index]):
+    print(questions)
+    for i, answer in enumerate(answers):
         print(f"{i + 1}. {answer}")
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
         user_answer = int(input("Respuesta: "))-1
     # Se verifica si la respuesta es correcta y suman puntos
-        if user_answer == correct_answers_index[question_index]:    
+        if user_answer == correct_answers:    
             print("¡Correcto!")
             puntos+=1
             break
@@ -41,12 +41,17 @@ for _ in range(3):
         elif user_answer not in correct_answers_index:
             print ("respuesta invalida")
             sys.exit(1)
+    # intento fallido resta puntos
+        else:
+            puntos+=-0.5
     else:
     # Si el usuario no responde correctamente después de 2 intentos,
     # se muestra la respu esta correcta y resta puntos
         print("Incorrecto. La respuesta correcta es:")
-        print(answers[question_index][correct_answers_index[question_index]])
+        print(answers[correct_answers])
         puntos+=-0.5
     # Se imprime un blanco al final de la pregunta
     print()
 print(f"puntuacion: {puntos}/3")
+
+#se tuvieron que reeplazar los indices porque las variables ya contaban con valores determinados, osea que se accedia a una direccion de forma directa
