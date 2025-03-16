@@ -47,10 +47,9 @@ for questions, answers, correct_answers in questions_to_ask:
             puntos+=-0.5
     else:
     # Si el usuario no responde correctamente después de 2 intentos,
-    # se muestra la respu esta correcta y resta puntos
+    # se muestra la respu esta correcta
         print("Incorrecto. La respuesta correcta es:")
         print(answers[correct_answers])
-        puntos+=-0.5
     # Se imprime un blanco al final de la pregunta
     print()
 # se muestra el puntaje final
