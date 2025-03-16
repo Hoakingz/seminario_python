@@ -1,3 +1,4 @@
+# importacion de biblotecas random y sys(para el exit del sistema)
 import random
 import sys
  # Preguntas para el juego
@@ -19,7 +20,7 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
-# se seleccionan 3 preguntas aleatorias
+# se seleccionan 3 preguntas aleatorias no repetidas, con su respuesta e indice
 questions_to_ask = random.sample(list(zip(questions,answers, correct_answers_index)), k=3)
 # contador de puntos
 puntos = 0
@@ -37,7 +38,7 @@ for questions, answers, correct_answers in questions_to_ask:
             print("¡Correcto!")
             puntos+=1
             break
-    # se verifica si la respuesta no se encuentra en el index
+    # se verifica si la respuesta no se encuentra en el index y sale del sistema con status=1
         elif user_answer not in correct_answers_index:
             print ("respuesta invalida")
             sys.exit(1)
@@ -52,6 +53,7 @@ for questions, answers, correct_answers in questions_to_ask:
         puntos+=-0.5
     # Se imprime un blanco al final de la pregunta
     print()
+# se muestra el puntaje final
 print(f"puntuacion: {puntos}/3")
 
 #se tuvieron que reeplazar los indices porque las variables ya contaban con valores determinados, osea que se accedia a una direccion de forma directa
