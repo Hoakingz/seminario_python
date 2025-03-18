@@ -32,6 +32,7 @@ for questions, answers, correct_answers in questions_to_ask:
         print(f"{i + 1}. {answer}")
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
+<<<<<<< HEAD
         user_answer = (input("Respuesta: "))
         try:
             user_answer_int = int(user_answer)-1
@@ -47,6 +48,18 @@ for questions, answers, correct_answers in questions_to_ask:
             print("¡Correcto!")
             puntos+=1
             break
+=======
+        user_answer = int(input("Respuesta: "))-1
+    # Se verifica si la respuesta es correcta y suman puntos
+        if user_answer == correct_answers:    
+            print("¡Correcto!")
+            puntos+=1
+            break
+    # se verifica si la respuesta no se encuentra en el index y sale del sistema con status=1
+        elif user_answer not in correct_answers_index:
+            print ("respuesta invalida")
+            sys.exit(1)
+>>>>>>> 0da50d12c5c2a6db3edbd3eb9920c4cc0aabbd2a
     # intento fallido resta puntos
         else:
             puntos+=-0.5
