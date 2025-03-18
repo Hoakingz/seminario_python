@@ -1,3 +1,4 @@
+# importacion de biblotecas random y sys(para el exit del sistema)
 import random
 import sys
  # Preguntas para el juego
@@ -19,34 +20,44 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
+# se seleccionan 3 preguntas aleatorias no repetidas, con su respuesta e indice
+questions_to_ask = random.sample(list(zip(questions,answers, correct_answers_index)), k=3)
 # contador de puntos
 puntos = 0
 # El usuario deberá contestar 3 preguntas
-for _ in range(3):
-    # Se selecciona una pregunta aleatoria
-    question_index = random.randint(0, len(questions)-1)
+for questions, answers, correct_answers in questions_to_ask:
     # Se muestra la pregunta y las respuestas posibles
-    print(questions[question_index])
-    for i, answer in enumerate(answers[question_index]):
+    print(questions)
+    for i, answer in enumerate(answers):
         print(f"{i + 1}. {answer}")
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        user_answer = int(input("Respuesta: "))-1
-    # Se verifica si la respuesta es correcta y suman puntos
-        if user_answer == correct_answers_index[question_index]:    
+        user_answer = (input("Respuesta: "))
+        try:
+            user_answer_int = int(user_answer)-1
+         # se verifica si la respuesta no se encuentra en el index y sale del sistema con status=1
+            if (user_answer_int)not in correct_answers_index:
+                print ("respuesta invalida")
+                sys.exit(1) 
+        except ValueError:
+                print ("respuesta invalida")
+                sys.exit(1)  
+            # Se verifica si la respuesta es correcta y suman puntos
+        if int(user_answer)-1 == correct_answers:    
             print("¡Correcto!")
             puntos+=1
             break
-    # se verifica si la respuesta no se encuentra en el index
-        elif user_answer not in correct_answers_index:
-            print ("respuesta invalida")
-            sys.exit(1)
+    # intento fallido resta puntos
+        else:
+            puntos+=-0.5
     else:
     # Si el usuario no responde correctamente después de 2 intentos,
-    # se muestra la respu esta correcta y resta puntos
+    # se muestra la respu esta correcta
         print("Incorrecto. La respuesta correcta es:")
-        print(answers[question_index][correct_answers_index[question_index]])
-        puntos+=-0.5
+        print(answers[correct_answers])
     # Se imprime un blanco al final de la pregunta
     print()
+# se muestra el puntaje final
 print(f"puntuacion: {puntos}/3")
+
+#se tuvieron que reeplazar los indices porque las variables ya contaban con valores determinados, osea que se accedia a una direccion de forma directa
