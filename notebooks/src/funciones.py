@@ -1,6 +1,6 @@
 def calcular_puntos(stats):
-    kills, assists, deaths = stats
-    return kills * 3 + assists + 1 if deaths else 0
+    kills, assists , deaths = stats
+    return kills * 3 + assists + ((-1) if deaths else 0)
 
 def orden_de_jugadores(round):
     dicc = {}
