@@ -13,5 +13,5 @@ def inicializar_valores(round):
     dicc_inicializado={}
     for player in round.keys():
         if player not in dicc_inicializado:
-            dicc_inicializado[player] = {"kills": 0,"assists": 0,"deaths": 0,"MVP":0,"points": 0}
+            dicc_inicializado[player] = dict(kills =0,assists = 0,deaths= 0, MVP = 0,points= 0)
     return dicc_inicializado
